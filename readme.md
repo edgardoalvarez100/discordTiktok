@@ -4,7 +4,8 @@
 
 ```
 cp .env.example .env
-npm install
+docker build -t tiktok-discord-bot .
+docker compose up -d
 ```
 
 Desarrollado por Ing. Edgardo Alvarez

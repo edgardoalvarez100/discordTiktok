@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  tiktok-bot:
+    image: tiktok-discord-bot
+    restart: always
+    env_file: .env
+    container_name: tiktok-bot
