@@ -6,6 +6,7 @@ const TIKTOK_USERNAME = process.env.TIKTOK_USERNAME;
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 
 let isLive = false; // Para evitar spam de notificaciones
+let notificationSent = false; // Para controlar el tiempo de espera
 
 async function checkLiveStatus() {
   try {
@@ -25,13 +26,16 @@ async function checkLiveStatus() {
     const isLiveNow = /"status":2/.test(response.data); // "status":2 indica que está en vivo en la respuesta de TikTok
 
     if (isLiveNow) {
-      if (!isLive) {
+      if (!isLive && !notificationSent) {
         console.log(`🔴 ${TIKTOK_USERNAME} está en vivo.`);
         await sendDiscordNotification();
         isLive = true;
-        setTimeout(function () {
-          console.log("This printed after about 15 min");
-        }, 15 * 60000);
+        notificationSent = true;
+
+        // Esperar 15 minutos antes de permitir otra notificación
+        setTimeout(() => {
+          notificationSent = false;
+        }, 15 * 60 * 1000);
       }
     } else {
       isLive = false;
