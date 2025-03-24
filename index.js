@@ -10,7 +10,10 @@ let notificationSent = false; // Para controlar el tiempo de espera
 
 async function checkLiveStatus() {
   try {
-    console.log("🔍 Verificando si TikTok Live está en vivo...");
+    console.log(
+      "🔍 Verificando si TikTok Live está en vivo... " +
+        new Date().toUTCString()
+    );
     const url = `https://www.tiktok.com/@${TIKTOK_USERNAME}/live`;
     const response = await axios.get(url, {
       headers: {
