@@ -29,6 +29,9 @@ async function checkLiveStatus() {
         console.log(`🔴 ${TIKTOK_USERNAME} está en vivo.`);
         await sendDiscordNotification();
         isLive = true;
+        setTimeout(function () {
+          console.log("This printed after about 15 min");
+        }, 15 * 60000);
       }
     } else {
       isLive = false;
